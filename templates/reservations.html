@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Reservations{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>📋 All Reservations</h1>
+    <p>Manage and track all book reservations</p>
+</div>
+
+{% if reservations %}
+<div class="table-container">
+    <table class="reservations-table">
+        <thead>
+            <tr>
+                <th>Book</th>
+                <th>Author</th>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Reserved</th>
+                <th>Due Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for res in reservations %}
+            <tr>
+                <td><strong>{{ res.title }}</strong></td>
+                <td>{{ res.author }}</td>
+                <td>{{ res.customer_name }}</td>
+                <td>{{ res.customer_email }}</td>
+                <td>
+                    {% if res.status == 'active' %}
+                    <span class="badge available" style="position:static;">Active</span>
+                    {% elif res.status == 'returned' %}
+                    <span class="badge" style="position:static; background:rgba(107,114,128,0.9); color:white;">Returned</span>
+                    {% elif res.status == 'cancelled' %}
+                    <span class="badge unavailable" style="position:static;">Cancelled</span>
+                    {% endif %}
+                </td>
+                <td>{{ res.reservation_date }}</td>
+                <td>{{ res.due_date }}</td>
+                <td>
+                    {% if res.status == 'active' %}
+                    <form action="{{ url_for('cancel_reservation', reservation_id=res.reservation_id) }}" method="POST"
+                          onsubmit="return confirm('Are you sure you want to cancel this reservation?');">
+                        <button type="submit" class="btn btn-danger btn-small">Cancel</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <span class="empty-icon">📋</span>
+    <h2>No reservations yet</h2>
+    <p>When customers reserve books, they will appear here.</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Browse Books</a>
+</div>
+{% endif %}
+{% endblock %}

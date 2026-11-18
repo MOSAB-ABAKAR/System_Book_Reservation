@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="book-detail-page">
+    <a href="{{ url_for('index') }}" class="back-link">← Back to all books</a>
+
+    <div class="book-detail-card">
+        <div class="book-detail-cover">
+            <span class="book-icon-large">📕</span>
+            {% if book.quantity and book.quantity > 0 %}
+            <span class="badge available">In Stock</span>
+            {% else %}
+            <span class="badge unavailable">Out of Stock</span>
+            {% endif %}
+        </div>
+
+        <div class="book-detail-info">
+            <h1>{{ book.title }}</h1>
+            <p class="book-author">by <strong>{{ book.author }}</strong></p>
+
+            <div class="book-info-grid">
+                <div class="info-item">
+                    <span class="info-label">Genre</span>
+                    <span class="info-value">{{ book.genre }}</span>
+                </div>
+                {% if book.price %}
+                <div class="info-item">
+                    <span class="info-label">Price</span>
+                    <span class="info-value">${{ "%.2f"|format(book.price) }}</span>
+                </div>
+                {% endif %}
+                {% if book.publication_year %}
+                <div class="info-item">
+                    <span class="info-label">Published</span>
+                    <span class="info-value">{{ book.publication_year }}</span>
+                </div>
+                {% endif %}
+                {% if book.isbn %}
+                <div class="info-item">
+                    <span class="info-label">ISBN</span>
+                    <span class="info-value">{{ book.isbn }}</span>
+                </div>
+                {% endif %}
+                <div class="info-item">
+                    <span class="info-label">Available</span>
+                    <span class="info-value {% if not book.quantity or book.quantity == 0 %}out-of-stock{% endif %}">
+                        {{ book.quantity }} copies
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reservation Form -->
+    {% if book.quantity and book.quantity > 0 %}
+    <div class="reserve-section">
+        <h2>📋 Reserve This Book</h2>
+        <form action="{{ url_for('reserve_book') }}" method="POST" class="reserve-form">
+            <input type="hidden" name="book_id" value="{{ book.book_id }}">
+
+            <div class="form-group">
+                <label for="customer_name">Your Name</label>
+                <input type="text" id="customer_name" name="customer_name" required
+                       placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="customer_email">Email Address</label>
+                <input type="email" id="customer_email" name="customer_email" required
+                       placeholder="you@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1"
+                       max="{{ book.quantity }}" required>
+                <small>Max {{ book.quantity }} available</small>
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1;">
+                <button type="submit" class="btn btn-primary btn-large">
+                    Reserve Now
+                </button>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <div class="reserve-section out-of-stock-section">
+        <h2>⚠️ Currently Unavailable</h2>
+        <p>This book is currently out of stock. Please check back later.</p>
+    </div>
+    {% endif %}
+
+    <!-- Reservations for this book -->
+    {% if reservations %}
+    <div class="reservations-section">
+        <h2>📜 Recent Reservations</h2>
+        <div class="reservation-list">
+            {% for res in reservations %}
+            {% if res.status != 'cancelled' %}
+            <div class="reservation-item">
+                <div class="reservation-info">
+                    <strong>{{ res.customer_name }}</strong>
+                    <span class="reservation-email">{{ res.customer_email }}</span>
+                </div>
+                <div class="reservation-meta">
+                    <span class="reservation-date">Reserved: {{ res.reservation_date }}</span>
+                    <span>Due: {{ res.due_date }}</span>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}All Books{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>📖 Browse Our Collection</h1>
+    <p>Find your next favorite book from our library</p>
+</div>
+
+{% if books %}
+<div class="book-grid">
+    {% for book in books %}
+    <div class="book-card">
+        <div class="book-card-cover">
+            <span class="book-icon">📕</span>
+            {% if book.quantity and book.quantity > 0 %}
+            <span class="badge available">In Stock</span>
+            {% else %}
+            <span class="badge unavailable">Out of Stock</span>
+            {% endif %}
+        </div>
+        <div class="book-card-body">
+            <h3 class="book-card-title">
+                <a href="{{ url_for('book_detail', book_id=book.book_id) }}">{{ book.title }}</a>
+            </h3>
+            <p class="book-card-author">by {{ book.author }}</p>
+            <div class="book-card-meta">
+                <span class="book-genre">{{ book.genre }}</span>
+                {% if book.price %}
+                <span class="book-price">${{ "%.2f"|format(book.price) }}</span>
+                {% endif %}
+            </div>
+            <div class="book-card-stock">
+                <span>Available: <strong>{{ book.quantity }}</strong> copies</span>
+            </div>
+            <a href="{{ url_for('book_detail', book_id=book.book_id) }}" class="btn btn-primary btn-full">
+                View Details
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <span class="empty-icon">📚</span>
+    <h2>No books available</h2>
+    <p>Check back later for new additions to our library.</p>
+</div>
+{% endif %}
+{% endblock %}
