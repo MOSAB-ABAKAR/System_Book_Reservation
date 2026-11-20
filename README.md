@@ -8,27 +8,6 @@ The Book Reservation System aims to digitize traditional library reservation pro
 
 Users can explore available books, make reservations, and manage their borrowing activities, while administrators can manage the book collection and monitor reservations.
 
-## Project Structure
-
-```
-BookStore/
-├── app.py              # Main Flask application
-├── .env                # Database credentials (do not commit)
-├── .env.example        # Template for .env file
-├── requirements.txt    # Python dependencies
-├── gunicorn_config.py  # Production WSGI server config
-├── schema.sql          # Database schema with sample data
-├── README.md           # This file
-├── templates/
-│   ├── base.html       # Base layout with navigation
-│   ├── index.html      # Book listing page
-│   ├── book.html       # Book detail & reservation form
-│   └── reservations.html  # All reservations table
-└── static/
-    └── css/
-        └── style.css   # Modern responsive stylesheet
-```
-
 ## Key Features
 
 ### User Features
@@ -52,9 +31,10 @@ Manage library records.
 ## Technologies Used
 
 Frontend: HTML5, CSS3, JavaScript
-Backend: [Flask Framework]
+Backend: [Flask Python Framework]
 Database: [MySQL]
 Version Control: Git & GitHub
+Tools: PyCharm 
 
 ## Screenshots
 markdown
@@ -119,14 +99,6 @@ Improved security and role-based access control.
 
    - Development: `http://127.0.0.1:5000`
    - Production: `http://localhost:8000`
-
-## Pages
-
-| Route | Description |
-|-------|-------------|
-| `/` | Browse all books |
-| `/book/<id>` | Book details & reservation form |
-| `/my-reservations` | View and manage all reservations |
 
 ## Production Deployment
 
