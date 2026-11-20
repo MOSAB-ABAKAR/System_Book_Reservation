@@ -8,6 +8,27 @@ The Book Reservation System aims to digitize traditional library reservation pro
 
 Users can explore available books, make reservations, and manage their borrowing activities, while administrators can manage the book collection and monitor reservations.
 
+## Project Structure
+
+```
+BookStore/
+├── app.py              # Main Flask application
+├── .env                # Database credentials (do not commit)
+├── .env.example        # Template for .env file
+├── requirements.txt    # Python dependencies
+├── gunicorn_config.py  # Production WSGI server config
+├── schema.sql          # Database schema with sample data
+├── README.md           # This file
+├── templates/
+│   ├── base.html       # Base layout with navigation
+│   ├── index.html      # Book listing page
+│   ├── book.html       # Book detail & reservation form
+│   └── reservations.html  # All reservations table
+└── static/
+    └── css/
+        └── style.css   # Modern responsive stylesheet
+```
+
 ## Key Features
 
 ### User Features
@@ -51,6 +72,72 @@ QR code integration.
 Advanced reporting and analytics.
 Improved security and role-based access control.
 
+## Setup
+
+### Prerequisites
+
+- Python 3.8+
+- MySQL server running with the `library_db` database
+
+### Installation
+
+1. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Configure database:**
+
+   Copy `.env.example` to `.env` and edit with your MySQL credentials:
+   ```
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=your_password
+   DB_NAME=library_db
+   ```
+
+3. **Set up the database:**
+
+   Run the schema file to create tables and sample data:
+   ```bash
+   mysql -u root -p < schema.sql
+   ```
+
+4. **Run the application:**
+
+   **Development:**
+   ```bash
+   python app.py
+   ```
+
+   **Production (with Gunicorn):**
+   ```bash
+   gunicorn -c gunicorn_config.py app:app
+   ```
+
+5. **Open in browser:**
+
+   - Development: `http://127.0.0.1:5000`
+   - Production: `http://localhost:8000`
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Browse all books |
+| `/book/<id>` | Book details & reservation form |
+| `/my-reservations` | View and manage all reservations |
+
+## Production Deployment
+
+For production, use **Gunicorn** as the WSGI server:
+
+```bash
+gunicorn -c gunicorn_config.py app:app
+```
+
+The app will run on `0.0.0.0:8000` with 4 worker processes.
+
 ## Author
 
 MOSAB ABAKAR
@@ -60,7 +147,7 @@ GitHub: @MOSAB-ABAKAR
 
 Contributions, suggestions, and improvements are welcome.
 
- ## License
+## License
 
 The project is for educational purposes and to test the advantages of the Flask framework. 
 ⭐ If you find this project useful, consider giving it a star!

@@ -81,8 +81,8 @@ def book_detail(book_id):
 def reserve_book():
     """Handle a new book reservation."""
     book_id = request.form.get("book_id", type=int)
-    customer_name = request.form.get("customer_name", strip=True)
-    customer_email = request.form.get("customer_email", strip=True)
+    customer_name = request.form.get("customer_name", "").strip()
+    customer_email = request.form.get("customer_email", "").strip()
     quantity = request.form.get("quantity", type=int, default=1)
     reservation_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
