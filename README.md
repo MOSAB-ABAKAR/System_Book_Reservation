@@ -1,98 +1,67 @@
-# 📚 Book Store — Library Reservation System
+## Book Reservation System
 
-A modern web application for browsing and reserving books from your library, built with **Flask** and connected to a **MySQL** database.
+A web-based Book Reservation System designed to simplify library operations and improve the book borrowing experience. The system provides an organized platform for managing books, handling reservations, and tracking borrowing activities.
 
-## Features
+## Project Overview
 
-- **Browse books** — View all available books in a clean card-based grid layout
-- **Book details** — See full information including genre, price, ISBN, and stock availability
-- **Reserve books** — Fill out a simple form to reserve one or more copies
-- **Manage reservations** — View all reservations with status tracking and cancel active ones
-- **Stock management** — Automatically decreases stock when reserved, restores on cancellation
-- **Responsive design** — Works on desktop and mobile devices
+The Book Reservation System aims to digitize traditional library reservation processes by providing an easy-to-use interface for users and administrators.
 
-## Project Structure
+Users can explore available books, make reservations, and manage their borrowing activities, while administrators can manage the book collection and monitor reservations.
 
-```
-BookStore/
-├── app.py              # Main Flask application
-├── .env                # Database credentials (do not commit)
-├── requirements.txt    # Python dependencies
-├── README.md           # This file
-├── templates/
-│   ├── base.html       # Base layout with navigation
-│   ├── index.html      # Book listing page
-│   ├── book.html       # Book detail & reservation form
-│   └── reservations.html  # All reservations table
-└── static/
-    └── css/
-        └── style.css   # Modern responsive stylesheet
-```
+## Key Features
 
-## Setup
+### User Features
+User registration and authentication.
+Browse available books.
+Search for books by title or category.
+View book details and availability.
+Reserve available books.
+View personal reservations.
+Manage reservation information.
 
-### Prerequisites
+### Administrator Features
+Admin authentication.
+Add new books to the collection.
+Update existing book information.
+Delete books from the system.
+Manage user reservations.
+Monitor book availability.
+Manage library records.
 
-- Python 3.8+
-- MySQL server running with the `library_db` database
+## Technologies Used
 
-### Installation
+Frontend: HTML5, CSS3, JavaScript
+Backend: [Your backend framework]
+Database: [Your database]
+Version Control: Git & GitHub
+Development Tools: [Your development tools]
 
-1. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Screenshots
+markdown
+![Home Page](screenshots/home.png)
+![Book Catalog](screenshots/books.png)
+![Reservation Page](screenshots/reservations.png)
+![Admin Dashboard](screenshots/admin.png)
 
-2. **Configure database:**
-   
-   Edit `.env` with your MySQL credentials:
-   ```
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=your_password
-   DB_NAME=library_db
-   ```
+## Future Improvements
+Email notifications for reservations.
+Advanced book search and filtering.
+Book return tracking.
+Reservation history.
+QR code integration.
+Advanced reporting and analytics.
+Improved security and role-based access control.
 
-3. **Run the application:**
-   ```bash
-   python app.py
-   ```
+## Author
 
-4. **Open in browser:**
-   
-   Navigate to `http://127.0.0.1:5000`
+MOSAB ABAKAR
 
-## Database Schema
+GitHub: @MOSAB-ABAKAR
+🤝 Contributing
 
-The app expects these tables in `library_db`:
+Contributions, suggestions, and improvements are welcome.
 
-### `books_in_store`
-| Column | Type | Description |
-|--------|------|-------------|
-| book_id | INT (PK) | Auto-increment primary key |
-| title | VARCHAR(255) | Book title |
-| author | VARCHAR(255) | Author name |
-| isbn | VARCHAR(20) | ISBN number |
-| genre | VARCHAR(100) | Book genre |
-| publication_year | INT | Year published |
-| quantity | INT | Available copies |
-| price | DECIMAL(10,2) | Book price |
+ ## License
 
-### `book_reservation`
-| Column | Type | Description |
-|--------|------|-------------|
-| reservation_id | INT (PK) | Auto-increment primary key |
-| book_id | INT (FK) | References books_in_store |
-| customer_name | VARCHAR(255) | Customer's name |
-| customer_email | VARCHAR(255) | Customer's email |
-| reservation_date | TIMESTAMP | When reserved |
-| due_date | DATE | Return due date (14 days) |
-| status | ENUM | 'active', 'returned', 'cancelled' |
-
-## Pages
-
-| Route | Description |
-|-------|-------------|
-| `/` | Browse all books |
-| `/book/<id>` | Book details & reservation form |
-| `/my-reservations` | View and manage all reservations |
+The project is for educational purposes and to test the advantages of the Flask framework. 
+⭐ If you find this project useful, consider giving it a star!
