@@ -34,7 +34,6 @@ Frontend: HTML5, CSS3, JavaScript
 Backend: [Flask Framework]
 Database: [MySQL]
 Version Control: Git & GitHub
-Development Tools: [Your development tools]
 
 ## Screenshots
 markdown
