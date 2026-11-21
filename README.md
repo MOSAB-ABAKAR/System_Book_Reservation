@@ -38,10 +38,10 @@ Tools: PyCharm
 
 ## Screenshots
 markdown
-![Home Page](screenshots/home.png)
-![Book Catalog](screenshots/books.png)
-![Reservation Page](screenshots/reservations.png)
-![Admin Dashboard](screenshots/admin.png)
+![Home Page](images/home.png)
+![Book Catalog](images/sidebar.png)
+![Reservation Page](images/reservations.png)
+![Admin Dashboard](images/admin.png)
 
 ## Future Improvements
 Email notifications for reservations.
