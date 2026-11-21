@@ -37,11 +37,9 @@ Version Control: Git & GitHub
 Tools: PyCharm 
 
 ## Screenshots
-markdown
+Markdown
 ![Home Page](images/home.png)
 ![Book Catalog](images/sidebar.png)
-![Reservation Page](images/bookdetail.png)
-![Admin Dashboard](images/book login.png)
 
 ## Future Improvements
 Email notifications for reservations.
